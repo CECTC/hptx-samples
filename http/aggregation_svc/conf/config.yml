@@ -1,0 +1,9 @@
+appid: aggregationSvc
+retry_dead_threshold: 130000
+rollback_retry_timeout_unlock_enable: true
+tm:
+  commitRetryCount: 5
+  rollbackRetryCount: 5
+etcd_config:
+  endpoints:
+    - localhost:2379
