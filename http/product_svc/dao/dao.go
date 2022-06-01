@@ -4,7 +4,7 @@ import (
 	"context"
 	"database/sql"
 
-	"github.com/cectc/dbpack/pkg/log"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -38,7 +38,7 @@ func (dao *Dao) AllocateInventory(ctx context.Context, reqs []*AllocateInventory
 	}
 	err = tx.Commit()
 	if err != nil {
-		log.Error(err)
+		logrus.Error(err)
 		return err
 	}
 	return nil

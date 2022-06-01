@@ -63,7 +63,7 @@ func (svc *Svc) CreateSo(ctx context.Context, rollback bool) error {
 	q1 := &rq1{Req: soMasters}
 	soReq, err := json.Marshal(q1)
 	fmt.Println(string(soReq))
-	req1, err := http.NewRequest("POST", "http://localhost:8002/createSo", bytes.NewBuffer(soReq))
+	req1, err := http.NewRequest("POST", "http://order-svc:8002/createSo", bytes.NewBuffer(soReq))
 	if err != nil {
 		panic(err)
 	}
@@ -85,7 +85,7 @@ func (svc *Svc) CreateSo(ctx context.Context, rollback bool) error {
 	}
 	ivtReq, _ := json.Marshal(q2)
 	fmt.Println(string(ivtReq))
-	req2, err := http.NewRequest("POST", "http://localhost:8001/allocateInventory", bytes.NewBuffer(ivtReq))
+	req2, err := http.NewRequest("POST", "http://product-svc:8001/allocateInventory", bytes.NewBuffer(ivtReq))
 	if err != nil {
 		panic(err)
 	}

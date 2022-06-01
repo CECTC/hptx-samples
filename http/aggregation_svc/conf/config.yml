@@ -6,4 +6,4 @@ tm:
   rollbackRetryCount: 5
 etcd_config:
   endpoints:
-    - localhost:2379
+    - etcd:2379

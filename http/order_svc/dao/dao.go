@@ -5,8 +5,8 @@ import (
 	"database/sql"
 	"time"
 
-	"github.com/cectc/dbpack/pkg/log"
 	"github.com/google/uuid"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -95,7 +95,7 @@ func (dao *Dao) CreateSO(ctx context.Context, soMasters []*SoMaster) ([]uint64, 
 	}
 	err = tx.Commit()
 	if err != nil {
-		log.Error(err)
+		logrus.Error(err)
 		return nil, err
 	}
 	return result, nil

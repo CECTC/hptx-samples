@@ -12,6 +12,7 @@ import (
 	"github.com/cectc/hptx/pkg/resource"
 	"github.com/cectc/mysql"
 	"github.com/gin-gonic/gin"
+	"github.com/sirupsen/logrus"
 
 	"github.com/cectc/hptx-samples/order_svc/dao"
 )
@@ -54,6 +55,7 @@ func main() {
 			q.Req)
 
 		if err != nil {
+			logrus.Error(err)
 			c.JSON(400, gin.H{
 				"success": false,
 				"message": "fail",
