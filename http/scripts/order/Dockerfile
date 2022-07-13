@@ -1,5 +1,5 @@
 FROM golang:1.18 as builder
-ARG GOPROXY="https://goproxy.io"
+ARG GOPROXY="https://goproxy.cn"
 WORKDIR /app
 ADD . /app
 # cache deps before building and copying source so that we don't need to re-download as much
