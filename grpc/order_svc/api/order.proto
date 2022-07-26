@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api;
+
+option go_package=".;api";
+
+message CreateSoReq {
+    repeated SoMaster SoMasters = 1;
+}
+
+message CreateSoResponse {
+    bool Success = 1;
+    string Message = 2;
+}
+
+message SoMaster {
+    int64 SysNo = 1;
+    string SoID = 2;
+    int64 BuyerUserSysNo = 3;
+    string SellerCompanyCode = 4;
+    int64 ReceiveDivisionSysNo = 5;
+    string ReceiveAddress = 6;
+    string ReceiveZip = 7;
+    string ReceiveContact = 8;
+    string ReceiveContactPhone = 9;
+    int64 StockSysNo = 10;
+    int32 PaymentType = 11;
+    double SoAmt = 12;
+    int32 Status = 13;
+    int64 OrderDate = 14;
+    int64 PaymentDate = 15;
+    int64 DeliveryDate = 16;
+    int64 ReceiveDate = 17;
+    string AppID = 18;
+    string Memo = 19;
+    string CreateUser = 20;
+    int64 GmtCreate = 21;
+    string ModifyUser = 22;
+    int64 GmtModified = 23;
+    repeated SoItem SoItems = 24;
+}
+
+message SoItem {
+    int64 SysNo = 1;
+    int64 SoSysNo = 2;
+    int64 ProductSysNo = 3;
+    string ProductName = 4;
+    double CostPrice = 5;
+    double OriginalPrice = 6;
+    double DealPrice = 7;
+    int32 Quantity = 8;
+}
+
+service SoService {
+    rpc CreateSo(CreateSoReq) returns (CreateSoResponse);
+}

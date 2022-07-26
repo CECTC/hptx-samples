@@ -1,0 +1,15 @@
+appid: orderSvc
+retry_dead_threshold: 130000
+rollback_retry_timeout_unlock_enable: true
+etcd_config:
+  endpoints:
+    - etcd:2379
+tm:
+  commitRetryCount: 5
+  rollbackRetryCount: 5
+at:
+  dsn: "root:123456@tcp(hptx-mysql:3306)/order?timeout=10s&readTimeout=10s&writeTimeout=10s&parseTime=true&loc=Local&charset=utf8mb4,utf8"
+  reportRetryCount: 5
+  reportSuccessEnable: false
+  lockRetryInterval: 5ms
+  lockRetryTimes: 30

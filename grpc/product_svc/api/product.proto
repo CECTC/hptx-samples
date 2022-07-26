@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package api;
+
+option go_package=".;api";
+
+message AllocateInventoryReq {
+    repeated AllocateInventory AllocateInventories = 1;
+}
+
+message AllocateInventoryResponse {
+    bool Success = 1;
+    string Message = 2;
+}
+
+message AllocateInventory {
+    int64 ProductSysNo = 1;
+    int32 Qty = 2;
+}
+
+service InventoryService {
+    rpc AllocateInventory(AllocateInventoryReq) returns (AllocateInventoryResponse);
+}

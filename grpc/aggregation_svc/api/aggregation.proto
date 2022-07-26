@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package api;
+
+option go_package=".;api";
+
+import "google/protobuf/empty.proto";
+
+message Response {
+    bool Success = 1;
+    string Message = 2;
+}
+
+service AggregationService {
+    rpc CreateSoCommit(google.protobuf.Empty) returns (Response);
+    rpc CreateSoRollback(google.protobuf.Empty) returns (Response);
+}
