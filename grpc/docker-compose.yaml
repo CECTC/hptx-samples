@@ -1,0 +1,89 @@
+version: "2.3"
+services:
+  etcd:
+    image: docker.io/bitnami/etcd:3
+    container_name: etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_NAME=etcd
+      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd:2380
+      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster
+      - ETCD_INITIAL_CLUSTER=etcd=http://etcd:2380
+      - ETCD_INITIAL_CLUSTER_STATE=new
+    networks:
+      - local
+    ports:
+      - "2379:2379"
+  mysql:
+    image: mysql:8.0
+    container_name: hptx-mysql
+    networks:
+      - local
+    ports:
+    - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "123456"
+    volumes:
+    - ./scripts/order.sql:/docker-entrypoint-initdb.d/order.sql:rw
+    - ./scripts/product.sql:/docker-entrypoint-initdb.d/product.sql:rw
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+  aggregation-svc:
+    build:
+      context: ${PWD}
+      dockerfile: ./scripts/aggregation/Dockerfile
+    container_name: aggregation-svc
+    networks:
+      - local
+    environment:
+      ConfigPath: "/root/config.yml"
+    volumes:
+      - ./aggregation_svc/conf/config.yml:/root/config.yml
+    depends_on:
+      - etcd
+  order-svc:
+    build:
+      context: ${PWD}
+      dockerfile: ./scripts/order/Dockerfile
+    container_name: order-svc
+    networks:
+      - local
+    environment:
+      ConfigPath: "/root/config.yml"
+    volumes:
+      - ./order_svc/conf/config2.yml:/root/config.yml
+    depends_on:
+      - etcd
+      - mysql
+  product-svc:
+    build:
+      context: ${PWD}
+      dockerfile: ./scripts/product/Dockerfile
+    container_name: product-svc
+    networks:
+      - local
+    environment:
+      ConfigPath: "/root/config.yml"
+    volumes:
+      - ./product_svc/conf/config3.yml:/root/config.yml
+    depends_on:
+      - etcd
+      - mysql
+  client:
+    build:
+      context: ${PWD}
+      dockerfile: ./scripts/client/Dockerfile
+    container_name: test-client
+    networks:
+      - local
+    ports:
+      - "8003:8003"
+    depends_on:
+      - product-svc
+      - order-svc
+      - aggregation-svc
+networks:
+  local:
+    name: dbpack
