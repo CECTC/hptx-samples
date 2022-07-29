@@ -18,23 +18,33 @@ func main() {
 	tm.Implement(svc.ProxySvc)
 
 	r.GET("/createSoCommit", func(c *gin.Context) {
-
-		svc.ProxySvc.CreateSo(c, false)
-
-		c.JSON(200, gin.H{
-			"success": true,
-			"message": "success",
-		})
+		err := svc.ProxySvc.CreateSo(c, false)
+		if err == nil {
+			c.JSON(200, gin.H{
+				"success": true,
+				"message": "success",
+			})
+		} else {
+			c.JSON(400, gin.H{
+				"success": false,
+				"message": err.Error(),
+			})
+		}
 	})
 
 	r.GET("/createSoRollback", func(c *gin.Context) {
-
-		svc.ProxySvc.CreateSo(c, true)
-
-		c.JSON(200, gin.H{
-			"success": true,
-			"message": "success",
-		})
+		err := svc.ProxySvc.CreateSo(c, true)
+		if err == nil {
+			c.JSON(200, gin.H{
+				"success": true,
+				"message": "success",
+			})
+		} else {
+			c.JSON(400, gin.H{
+				"success": false,
+				"message": err.Error(),
+			})
+		}
 	})
 
 	r.Run(":8003")
