@@ -1,5 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/wuxian/Desktop/555/hptx-samples/http_proxy_zorm'
-GOOS="linux"  GOARCH="amd64" CGO_ENABLED=0 go build -o aggregation_svc/AggregationSvc ./aggregation_svc
-make: Leaving directory `/Users/wuxian/Desktop/555/hptx-samples/http_proxy_zorm'
- 
