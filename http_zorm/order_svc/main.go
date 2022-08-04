@@ -26,12 +26,10 @@ func InitDb(db *sql.DB) error {
 		//连接数据库DSN
 		DSN: config.GetATConfig().DSN,
 		//数据库类型
-		// DriverName: "dm",
-		// DBType:     "dm",
 		DriverName: "mysql",
 		DBType:     "mysql",
 		//是否的打印sql
-		PrintSQL: true,
+		// PrintSQL: true,
 		//最大连接数 默认50
 		MaxOpenConns: 0,
 		//最大空闲数 默认50

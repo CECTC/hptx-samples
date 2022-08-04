@@ -26,7 +26,7 @@ func InitDbByZorm(db *sql.DB) error {
 		DriverName: "mysql",
 		DBType:     "mysql",
 		//是否的打印sql
-		PrintSQL: true,
+		// PrintSQL: true,
 		//最大连接数 默认50
 		MaxOpenConns: 50,
 		//最大空闲数 默认50
