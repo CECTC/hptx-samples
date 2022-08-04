@@ -3,7 +3,7 @@ module github.com/cectc/hptx-samples
 go 1.16
 
 require (
-	gitee.com/chunanyong/zorm v1.5.8
+	gitee.com/chunanyong/zorm v1.5.9
 	github.com/cectc/hptx v1.0.4
 	github.com/cectc/mysql v1.6.1
 	github.com/gin-gonic/gin v1.7.0
