@@ -19,14 +19,12 @@ var dbDao *zorm.DBDao
 func InitDbByZorm(db *sql.DB) error {
 	dbConfig := zorm.DataSourceConfig{
 		//连接数据库DSN
-		DSN: "root:Wuxian091228@tcp(rm-bp1d4145wfeb6z4stso.mysql.rds.aliyuncs.com:3306)/order?charset=utf8&parseTime=true", //MySQL
+		DSN: "root:123456@tcp(hptx-mysql:3306)/order?timeout=10s&readTimeout=10s&writeTimeout=10s&parseTime=true&loc=Local&charset=utf8mb4,utf8",
 		//数据库类型
-		// DriverName: "dm",
-		// DBType:     "dm",
 		DriverName: "mysql",
 		DBType:     "mysql",
 		//是否的打印sql
-		PrintSQL: true,
+		// PrintSQL: true,
 		//最大连接数 默认50
 		MaxOpenConns: 0,
 		//最大空闲数 默认50
