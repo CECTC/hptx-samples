@@ -25,11 +25,12 @@ func InitDbByZorm(db *sql.DB) error {
 	dbConfig := zorm.DataSourceConfig{
 		//连接数据库DSN
 		DSN: config.GetATConfig().DSN,
-		//数据库类型
+		//数据库驱动名称:mysql,postgres,oci8...
 		DriverName: "mysql",
-		DBType:     "mysql",
-		//是否的打印sql
-		// PrintSQL: true,
+		//数据库类型(方言判断依据):mysql,postgresql,oracle...
+		DBType: "mysql",
+		//设置慢日志
+		SlowSQLMillis: 0,
 		//最大连接数 默认50
 		MaxOpenConns: 0,
 		//最大空闲数 默认50

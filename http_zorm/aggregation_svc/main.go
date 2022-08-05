@@ -20,13 +20,14 @@ func InitDbByZorm(db *sql.DB) error {
 	dbConfig := zorm.DataSourceConfig{
 		//连接数据库DSN
 		DSN: "root:123456@tcp(hptx-mysql:3306)/order?timeout=10s&readTimeout=10s&writeTimeout=10s&parseTime=true&loc=Local&charset=utf8mb4,utf8",
-		//
+		//使用现有的数据库连接,优先级高于DSN
 		SQLDB: db,
-		//数据库类型
+		//数据库驱动名称:mysql,postgres,oci8...
 		DriverName: "mysql",
-		DBType:     "mysql",
-		//是否的打印sql
-		// PrintSQL: true,
+		//数据库类型(方言判断依据):mysql,postgresql,oracle...
+		DBType: "nysql",
+		//设置慢日志
+		SlowSQLMillis: 0,
 		//最大连接数 默认50
 		MaxOpenConns: 50,
 		//最大空闲数 默认50
