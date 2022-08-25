@@ -14,7 +14,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
 
-	"github.com/cectc/hptx-samples/product_svc/dao"
+	"github.com/cectc/hptx-samples/order_svc/dao"
 )
 
 func main() {
@@ -22,7 +22,6 @@ func main() {
 
 	configPath := os.Getenv("ConfigPath")
 	hptx.InitFromFile(configPath)
-	mysql.RegisterATResource(config.GetATConfig().DSN)
 
 	sqlDB, err := sql.Open("mysql", config.GetATConfig().DSN)
 	if err != nil {
@@ -32,16 +31,15 @@ func main() {
 	sqlDB.SetMaxIdleConns(20)
 	sqlDB.SetConnMaxLifetime(4 * time.Hour)
 
-	if err != nil {
-		panic(err)
-	}
+	mysql.RegisterXAResource(sqlDB)
+
 	d := &dao.Dao{
 		DB: sqlDB,
 	}
 
-	r.POST("/allocateInventory", func(c *gin.Context) {
+	r.POST("/createSo", func(c *gin.Context) {
 		type req struct {
-			Req []*dao.AllocateInventoryReq
+			Req []*dao.SoMaster
 		}
 		var q req
 		if err := c.ShouldBindJSON(&q); err != nil {
@@ -49,7 +47,7 @@ func main() {
 			return
 		}
 
-		err := d.AllocateInventory(
+		_, err := d.CreateSO(
 			context.WithValue(context.Background(), constant.XID, c.Request.Header.Get("XID")),
 			q.Req)
 
@@ -66,6 +64,5 @@ func main() {
 			})
 		}
 	})
-
-	r.Run(":8001")
+	r.Run(":8002")
 }

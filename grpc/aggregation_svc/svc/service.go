@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	hptxGrpc "github.com/cectc/hptx/pkg/contrib/grpc"
+	"github.com/cectc/hptx/pkg/constant"
 	"github.com/golang/protobuf/ptypes/empty"
 	"google.golang.org/grpc/metadata"
 
@@ -19,8 +19,8 @@ type Service struct {
 }
 
 func (svc *Service) CreateSoCommit(ctx context.Context, _ *empty.Empty) (*api.Response, error) {
-	xid := ctx.Value(hptxGrpc.XID)
-	md := metadata.Pairs(hptxGrpc.XID, xid.(string))
+	xid := ctx.Value(constant.XID)
+	md := metadata.Pairs(string(constant.XID), xid.(string))
 	ctx = metadata.NewOutgoingContext(ctx, md)
 
 	soMasters := []*soApi.SoMaster{
@@ -76,8 +76,8 @@ func (svc *Service) CreateSoCommit(ctx context.Context, _ *empty.Empty) (*api.Re
 }
 
 func (svc *Service) CreateSoRollback(ctx context.Context, _ *empty.Empty) (*api.Response, error) {
-	xid := ctx.Value(hptxGrpc.XID)
-	md := metadata.Pairs(hptxGrpc.XID, xid.(string))
+	xid := ctx.Value(constant.XID)
+	md := metadata.Pairs(string(constant.XID), xid.(string))
 	ctx = metadata.NewOutgoingContext(ctx, md)
 
 	soMasters := []*soApi.SoMaster{

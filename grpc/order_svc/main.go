@@ -10,7 +10,6 @@ import (
 
 	"github.com/cectc/hptx"
 	"github.com/cectc/hptx/pkg/config"
-	"github.com/cectc/hptx/pkg/resource"
 	"github.com/cectc/mysql"
 	"google.golang.org/grpc"
 
@@ -22,8 +21,7 @@ import (
 func main() {
 	configPath := os.Getenv("ConfigPath")
 	hptx.InitFromFile(configPath)
-	mysql.RegisterResource(config.GetATConfig().DSN)
-	resource.InitATBranchResource(mysql.GetDataSourceManager())
+	mysql.RegisterATResource(config.GetATConfig().DSN)
 
 	sqlDB, err := sql.Open("mysql", config.GetATConfig().DSN)
 	if err != nil {
