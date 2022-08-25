@@ -3,8 +3,7 @@ package svc
 import (
 	"context"
 
-	hptxGrpc "github.com/cectc/hptx/pkg/contrib/grpc"
-	"github.com/cectc/mysql"
+	"github.com/cectc/hptx/pkg/constant"
 	"google.golang.org/grpc/metadata"
 
 	"github.com/cectc/hptx-samples/order_svc/api"
@@ -17,8 +16,8 @@ type Service struct {
 
 func (svc *Service) CreateSo(ctx context.Context, req *api.CreateSoReq) (*api.CreateSoResponse, error) {
 	md, _ := metadata.FromIncomingContext(ctx)
-	xid := md.Get(hptxGrpc.XID)[0]
-	ctx = context.WithValue(ctx, mysql.XID, xid)
+	xid := md.Get(string(constant.XID))[0]
+	ctx = context.WithValue(ctx, constant.XID, xid)
 
 	_, err := svc.Dao.CreateSO(ctx, req.SoMasters)
 	if err == nil {

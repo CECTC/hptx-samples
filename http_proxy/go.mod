@@ -3,8 +3,8 @@ module github.com/cectc/hptx-samples
 go 1.16
 
 require (
-	github.com/cectc/hptx v1.0.4
-	github.com/cectc/mysql v1.6.1
+	github.com/cectc/hptx v1.0.5
+	github.com/cectc/mysql v1.6.2
 	github.com/gin-gonic/gin v1.7.0
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/google/uuid v1.2.0

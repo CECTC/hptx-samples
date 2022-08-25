@@ -9,7 +9,7 @@ import (
 
 	"github.com/cectc/hptx"
 	"github.com/cectc/hptx/pkg/config"
-	"github.com/cectc/hptx/pkg/resource"
+	"github.com/cectc/hptx/pkg/constant"
 	"github.com/cectc/mysql"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
@@ -22,8 +22,7 @@ func main() {
 
 	configPath := os.Getenv("ConfigPath")
 	hptx.InitFromFile(configPath)
-	mysql.RegisterResource(config.GetATConfig().DSN)
-	resource.InitATBranchResource(mysql.GetDataSourceManager())
+	mysql.RegisterATResource(config.GetATConfig().DSN)
 
 	sqlDB, err := sql.Open("mysql", config.GetATConfig().DSN)
 	if err != nil {
@@ -50,7 +49,7 @@ func main() {
 		_, err := d.CreateSO(
 			context.WithValue(
 				context.Background(),
-				mysql.XID,
+				constant.XID,
 				c.Request.Header.Get("XID")),
 			q.Req)
 

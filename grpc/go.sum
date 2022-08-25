@@ -121,10 +121,10 @@ github.com/carlmjohnson/flagext v0.21.0/go.mod h1:Eenv0epIUAr4NuedNmkzI8WmBmjIxZ
 github.com/casbin/casbin/v2 v2.1.2/go.mod h1:YcPU1XXisHhLzuxH9coDNf2FbKpjGlbCg3n9yuLkIJQ=
 github.com/cectc/dbpack v0.3.1 h1:bkIS0dMecGT14EeD7/gBgroyy/zfO27Dk4iEbfDUTkI=
 github.com/cectc/dbpack v0.3.1/go.mod h1:xofYTSvQFzwaN5L3KrEh8/chYg4pcbCo/+UVg1y99Hs=
-github.com/cectc/hptx v1.0.4 h1:x/bssMsYmIDMKI5kkeeOIJftPuRfNENZp5O95WOvgqw=
-github.com/cectc/hptx v1.0.4/go.mod h1:6UF0JJtfOksYnUL9gYCUgufb95PT0e2KD/WYN4LPgzk=
-github.com/cectc/mysql v1.6.1 h1:+rnh4ppoBRzoPQAdSnNBPfFCbJtzzrH5+/jDPN6+K30=
-github.com/cectc/mysql v1.6.1/go.mod h1:YvSdtLf/CzJ0uwDrAk3uXpPBIcqAsS2VQ0TbyJJG/y4=
+github.com/cectc/hptx v1.0.5 h1:UrT8eqSTU4vEDpuNFiiOBmaZCe/UE3s+3YHy/oGbob8=
+github.com/cectc/hptx v1.0.5/go.mod h1:6UF0JJtfOksYnUL9gYCUgufb95PT0e2KD/WYN4LPgzk=
+github.com/cectc/mysql v1.6.2 h1:w77uWEO6jX1nZjDJLs/kgmydwx5w0tUgiEGkyYNTFAw=
+github.com/cectc/mysql v1.6.2/go.mod h1:fWF635LS/kPo2ml597nIwCtkHS6l8EvI8vIwVKx9ZAE=
 github.com/cenkalti/backoff v2.2.1+incompatible/go.mod h1:90ReRw6GdpyfrHakVjL/QHaoyV4aDUVVkXQJJJ3NXXM=
 github.com/cenkalti/backoff/v4 v4.0.2/go.mod h1:eEew/i+1Q6OrCDZh3WiXYv3+nJwBASZ8Bog/87DQnVg=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=

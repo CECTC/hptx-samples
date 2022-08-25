@@ -22,7 +22,6 @@ func main() {
 
 	configPath := os.Getenv("ConfigPath")
 	hptx.InitFromFile(configPath)
-	mysql.RegisterATResource(config.GetATConfig().DSN)
 
 	sqlDB, err := sql.Open("mysql", config.GetATConfig().DSN)
 	if err != nil {
@@ -31,6 +30,8 @@ func main() {
 	sqlDB.SetMaxOpenConns(100)
 	sqlDB.SetMaxIdleConns(20)
 	sqlDB.SetConnMaxLifetime(4 * time.Hour)
+
+	mysql.RegisterXAResource(sqlDB)
 
 	if err != nil {
 		panic(err)
