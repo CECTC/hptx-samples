@@ -27,8 +27,8 @@ func InitDbByZorm(db *sql.DB) error {
 		DSN: config.GetATConfig().DSN,
 		//数据库驱动名称:mysql,postgres,oci8...
 		DriverName: "mysql",
-		//数据库类型(方言判断依据):mysql,postgresql,oracle...
-		DBType: "mysql",
+		//数据库方言:mysql,postgresql,oracle...
+		Dialect: "mysql",
 		//设置慢日志
 		SlowSQLMillis: 1,
 		//最大连接数 默认50
