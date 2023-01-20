@@ -18,7 +18,7 @@ type ZormGlobalTransaction struct {
 
 // MyFuncGlobalTransaction zorm适配seata/hptx 全局分布式事务的函数
 // 重要!!!!需要配置zorm.DataSourceConfig.FuncGlobalTransaction=MyFuncGlobalTransaction 重要!!!
-func MyFuncGlobalTransaction(ctx context.Context) (zorm.IGlobalTransaction, context.Context, error) {
+func MyFuncGlobalTransaction(ctx context.Context) (zorm.IGlobalTransaction, context.Context, context.Context, error) {
 	//获取seata/hptx的rootContext
 	rootContext := gtxContext.NewRootContext(ctx)
 	//创建seata/hptx事务
@@ -26,10 +26,10 @@ func MyFuncGlobalTransaction(ctx context.Context) (zorm.IGlobalTransaction, cont
 	//使用zorm.IGlobalTransaction接口对象包装分布式事务,隔离seata/hptx依赖
 	globalTransaction := &ZormGlobalTransaction{globalTx}
 
-	return globalTransaction, rootContext, nil
+	return globalTransaction, ctx, rootContext, nil
 }
 
-//实现zorm.IGlobalTransaction 托管全局分布式事务接口,seata和hptx目前实现代码一致,只是引用的实现包不同
+// 实现zorm.IGlobalTransaction 托管全局分布式事务接口,seata和hptx目前实现代码一致,只是引用的实现包不同
 // BeginGTX 开启全局分布式事务
 func (gtx *ZormGlobalTransaction) BeginGTX(ctx context.Context, globalRootContext context.Context) error {
 	rootContext := globalRootContext.(*gtxContext.RootContext)
